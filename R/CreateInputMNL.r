@@ -5,14 +5,14 @@
 #' @param max_genes The maximum of enriched genes to include per host group
 #' 
 #' @return The input csv file for fitting multinomial logistic model
-#' @return the input csv file for prediction (of strains to attribute)
+#' @return the input csv file for prediction (for strains to attribute)
 #' 
 #'  @author Laurent Guillier, \email {guillier.laurent@gmail.com}
 #'  
 #'  @export
 
 
-create_input_mnl<-function(traitfile,roary_Rtab,max_genes)
+CreateInputMNL<-function(traitfile,roary_Rtab,max_genes)
 {
 
 

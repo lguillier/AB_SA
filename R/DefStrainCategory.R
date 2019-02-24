@@ -10,7 +10,7 @@
 #'  
 
 
-def_strain_category<-function(filenametrait)
+DefStrainCategory<-function(filenametrait)
 {
 data<-read.csv(filenametrait,header=TRUE,sep=",")
 categories<-colnames(data)

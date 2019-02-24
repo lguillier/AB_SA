@@ -10,7 +10,7 @@
 #'  @export
  
 
-read_parse_scoary<-function(filenamescoary,roary_Rtab)
+ReadParseScoary<-function(filenamescoary,roary_Rtab)
 {roary_out<-read.table(roary_Rtab,header = TRUE)
 data_<-read.csv(filenamescoary,header=TRUE,sep=",")
 genes_<-c()
