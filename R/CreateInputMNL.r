@@ -1,8 +1,8 @@
 #' The function prepares the input file for multinomial logistic regression
 #' 
 #' @param traitfile The name trait file used as input by Scoary
-#' @param roary_Rtab The name of gene presence absence Rtab file produced by Roary 
-#' @param max_genes The maximum of enriched genes to include per host group
+#' @param roaryRtab The name of gene presence absence Rtab file produced by Roary 
+#' @param maxGenes The maximum of enriched genes to include per host group
 #' 
 #' @return The input csv file for fitting multinomial logistic model
 #' @return the input csv file for prediction (for strains to attribute)
@@ -12,7 +12,7 @@
 #'  @export
 
 
-CreateInputMNL<-function(traitfile,roary_Rtab,max_genes)
+CreateInputMNL<-function(traitfile,roaryRtab,maxGenes)
 {
 
 
@@ -27,7 +27,7 @@ id_categories<-data.frame(id=traits$X,cat=categories) # will be used in step 3.
 
 ###### 2. Gather information from scoary enriched genes
 # Load of output Rtab from roary
-roary_Rtab<-c(roary_Rtab)
+roaryRtab<-c(roaryRtab)
 
 #List of files in the directory
 files<-list.files() 
@@ -37,23 +37,23 @@ pos_scoaryfiles<-grep(pattern = "results.csv",files)
 filenamescoary<-files[pos_scoaryfiles]
 
 # Extract from roary Rtab the list of all enriched genes (whatever the source) : create a list object
-all_enriched<-mapply(read_parse_scoary,filenamescoary,roary_Rtab)
+all_enriched<-mapply(read_parse_scoary,filenamescoary,roaryRtab)
 names(all_enriched)<-trait_names 
 
 
-####### 3. Create input file for fitting multinomial logistic model, max_genes input is used to define the initial genes of interest
+####### 3. Create input file for fitting multinomial logistic model, maxGenes input is used to define the initial genes of interest
 
 # Merge the genes in the list object in a data frame 
 input<-c()
 for (i in 1:length(all_enriched)) { potential<-all_enriched[[i]]
-  chosen<-potential[1:min(max_genes,length(all_enriched[[i]]))]
+  chosen<-potential[1:min(maxGenes,length(all_enriched[[i]]))]
   input<-c(input,chosen)}
 
 # Keep one record by gene (a gene can be enriched in two or more source)
 input<-unique(input)
 
 # Preparation of gene presence/absence matrix
-roary_out<-read.table(roary_Rtab,header = TRUE)
+roary_out<-read.table(roaryRtab,header = TRUE)
 mnl_input<-roary_out[input,]
 t_mnl <- transpose(mnl_input)
 colnames(t_mnl) <- mnl_input$Gene
