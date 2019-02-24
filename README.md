@@ -9,7 +9,12 @@ Predicts the source of bacterial strains based on their accessory genes.
     * [Genes enriched](#genes-enriched)
     * [Preparing input files](#preparing-inpu-files)
   * [Running AB_SA](#running-ab_sa)
+    * [Training and testing a multinomial logistic model]
+    * [Fitting the multinomial logistic model]
+    * [Predicting the source of other strains]
+    * [Ploting the results] 
 
+## Licence
 ## Introduction
 
 The [AB_SA](https://github.com/lguillier/AB_SA) ("Accessory-based source attribution") method aims at attributing the origin of bacterial strains associated to human cases or isolated in environment. 
