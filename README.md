@@ -9,12 +9,12 @@ Predicts the source of bacterial strains based on their accessory genes.
     * [Genes enriched](#genes-enriched)
     * [Preparing input files](#preparing-inpu-files)
   * [Running AB_SA](#running-ab_sa)
-    * [Training and testing a multinomial logistic model]
-    * [Fitting the multinomial logistic model]
-    * [Predicting the source of other strains]
-    * [Ploting the results] 
-
-## Licence
+    * [Training and testing a multinomial logistic model](#training-and-testing)
+    * [Fitting the multinomial logistic model](#fitting-MNL)
+    * [Predicting the source of other strains](#predict)
+    * [Plotting the results](#plotting)
+  * [Licence](#licence)
+  
 ## Introduction
 
 The [AB_SA](https://github.com/lguillier/AB_SA) ("Accessory-based source attribution") method aims at attributing the origin of bacterial strains associated to human cases or isolated in environment. 
@@ -36,7 +36,7 @@ scoary -g ./DE_pangenome_default/gene_presence_absence.csv -t ./DE_scoary/DE_sco
 the --no_pairwise flag is used for enrichment. The --collapse flag was used . The naive p-value is used to show the genes most overrepresented in a specific source. A threshold p-value of 0.01 is used. To reduce or increase the number of genes to be used by AB_SA method threshold as well as . Association of sources and genes are then carried out by the multinomial model.
 
 ### Preparing input files
-A script was developped to prepare i) the input file for multinomial logistic model training/testing/fitting and ii) the input file for predicting the source of unknwon strains 
+A script (AB_SA/R/CreateInputMNL.r) was developped to prepare i) the input file for multinomial logistic model training/testing/fitting and ii) the input file for predicting the source of unknwon strains 
 
 ## Running AB_SA
 
