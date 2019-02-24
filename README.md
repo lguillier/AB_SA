@@ -17,6 +17,6 @@ AB_SA method relies on accessory genes and multinomial logistic model. AB_SA use
 ## Input data
 
 ### Pangenome
-The pangenome of the strains (both strains from the sources and the strains to attribute) included in the study should be determined. The AB_SA method parses the Rtab produced by [Roary] (http://sanger-pathogens.github.io/Roary) 
+The pangenome of the strains (both strains from the sources and the strains to attribute) included in the study should be determined. The AB_SA method parses the .Rtab produced by [Roary](http://sanger-pathogens.github.io/Roary) 
 
 ### Genes enriched
