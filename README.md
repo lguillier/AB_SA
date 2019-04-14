@@ -46,6 +46,12 @@ CreateInputMNL(traitfile="DE_scoary_trait.csv",roary_Rtab="gene_presence_absence
 ## Running AB_SA
 
 ### Training and testing a multinomial logistic model
+ In order to assess the performance of the multinomial model with the enriched genes, a random splitting of data into training set (default value percent_cross= 70% for building a predictive model) and test set (1-percent_cross for evaluating the model) is carried out. The radonm splitting is carried out nboot times (default nboot=100)
+ 
+ 
+````
+testedMNL<-MNLTrainTest("mnl_input_0.csv",percent_cross=0.70,nboot=100)
+````
 
 ### Fitting the multinomial logistic model
 
