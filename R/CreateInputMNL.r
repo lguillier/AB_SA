@@ -4,6 +4,8 @@
 #' @param roaryRtab The name of gene presence absence Rtab file produced by Roary 
 #' @param maxGenes The maximum of enriched genes to include per host group
 #' 
+#' @seealso  ReadParseScoary.r and DefStrainCategory.r functions: both called by CreateInputMN() 
+#' 
 #' @return The input csv file for fitting multinomial logistic model
 #' @return the input csv file for prediction (for strains to attribute)
 #' 

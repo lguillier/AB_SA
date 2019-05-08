@@ -13,21 +13,21 @@ library(caret)
 ## Call functions built to run ABSA
 
 # Internal functions
-source("read_parse_scoary.r") # function called by create_input_mnl.r
-source("def_strain_category.r") # function called by create_input_mnl.r
+source("ReadParseScoary.r") # function called by create_input_mnl.r
+source("DefStrainCategory.r") # function called by create_input_mnl.r
 
 # Functions for ABSA user
-source("create_input_mnl.r") # function to be used to create mnl inputs (for fitting and prediction)
-source("multinomial_train_test.r") # Training and testing the model
-source("multinomial_fit.r") # Fitting (full dataset)
-source("multinomial_predict.r") # Predicting membership probabilities of strains to attribute 
+source("CreateInputMNL.r") # function to be used to create mnl inputs (for fitting and prediction)
+source("MNLTrainTest.r") # Training and testing the model
+source("MNLFit.r") # Fitting (full dataset)
+source("MNLPredict.r") # Predicting membership probabilities of strains to attribute 
 
-## Applied ABSA on DE dataset
+## Applied ABSA on a dataset (here Salmonella Typhimurium )
 
-create_input_mnl("DE_scoary_trait.csv","gene_presence_absence.Rtab",3)
+CreateInputMNL("DE_scoary_trait.csv","gene_presence_absence.Rtab",3)
 
-multinomial_train_test("mnl_input_0.csv",0.70,10)
+testedMNL<-MNLTrainTest("mnl_input_0.csv",0.70,10)
 
-final_trained<-multinomial_fit("mnl_input_0.csv")
+final.trained<-MNLFit("mnl_input_0.csv")
 
-prediction<-multinomial_predict("predict_sporadic.csv",final_trained)
+predict.unknown<-MNLPredict("predict_sporadic.csv",final_trained)

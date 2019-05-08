@@ -52,8 +52,10 @@ CreateInputMNL(traitfile="DE_scoary_trait.csv",roary_Rtab="gene_presence_absence
 ````
 testedMNL<-MNLTrainTest("mnl_input_0.csv",percent_cross=0.70,nboot=100)
 ````
+The testedMNL() function returns the accuracy values of the model according to the different training/testing sets. More precisely the quantiles of accuracies   
 
 ### Fitting the multinomial logistic model
+
 
 ### Predicting the source of other strains
 
