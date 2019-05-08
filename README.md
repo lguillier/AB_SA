@@ -27,35 +27,37 @@ AB_SA method relies on accessory genes and multinomial logistic model. AB_SA use
 The pangenome of the strains (both strains from the sources and the strains to attribute) included in the study should be determined. The AB_SA method parses the .Rtab produced by [Roary](http://sanger-pathogens.github.io/Roary). 
 
 ### Genes enriched
-In order to know which genes were enriched in each host groups, [Scoary](https://github.com/AdmiralenOla/Scoary) is used. Scoary takes the gene_presence_absence.csv file from Roary as well as a traits file reporting the source associated to each strains. The following code was applied  to determine the genes that are enriched in which sources.
+In order to know which genes were enriched in each host groups, [Scoary](https://github.com/AdmiralenOla/Scoary) is used. Scoary takes the gene_presence_absence.csv file from Roary as well as a traits file reporting the source associated to each strains. The following code was applied to determine the genes that are enriched in which sources.
 
 ```
 scoary -g ./DE_pangenome_default/gene_presence_absence.csv -t ./DE_scoary/DE_scoary_trait.csv -p 1E-2 -c I --no_pairwise --collapse
 ```
 
-The --no_pairwise flag is used for enrichment. The --collapse flag was used to regroup the genes which have the same pattern of distribution in the sources (a single gene, the first of the groups is then taken into accoiunt by AB_SA method) . The naive p-value is used to show the genes most overrepresented in a specific source. A threshold p-value of 0.01 is used. To reduce or increase the number of genes to be used by AB_SA method threshold as well as . Association of sources and genes are then carried out by the multinomial model.
+The --no_pairwise flag is used for enrichment. The --collapse flag was used to regroup the genes which have the same pattern of distribution in the sources (a single gene, the first of the groups is then taken into accoiunt by AB_SA method) . The naive p-value is used to show the genes most overrepresented in a specific source. A threshold p-value of 0.01 is used. To reduce or increase the number of genes to be used by AB_SA method threshold user can modify the threshold p-value. Association of sources and genes are then carried out by the multinomial model.
+
+## Running AB_SA
 
 ### Preparing input files
 
-A script (https://github.com/lguillier/AB_SA/blob/master/R/CreateInputMNL.r) was developped to prepare i) the input file for multinomial logistic model training/testing/fitting and ii) the input file for predicting the source of unknwon strains. The user has to provide the file name of the scoary trait file and the .Rtab file name of the gene presence/absence output from roary. The user defines the maximal number genes to include per source (maxGenes). The genes are chosen according to their rank  
+A script (https://github.com/lguillier/AB_SA/blob/master/R/CreateInputMNL.r) was developped to prepare i) the input file for multinomial logistic model training/testing/fitting and ii) the input file for predicting the source of unknwon strains. The user has to provide the file name of the scoary trait file and the .Rtab file name of the gene presence/absence output from roary. The user defines the maximal number genes to include per source (maxGenes). The genes are chosen according to their rank (i.e. lower p-values).  
 
 ````
 CreateInputMNL(traitfile="DE_scoary_trait.csv",roary_Rtab="gene_presence_absence.Rtab",maxGenes=10)
 ````
-
-## Running AB_SA
+The function produces a csv file (default name "mnl_input_n.csv" where n is the number of genes selected).
 
 ### Training and testing a multinomial logistic model
  In order to assess the performance of the multinomial model with the enriched genes, a random splitting of data into training set (default value percent_cross= 70% for building a predictive model) and test set (1-percent_cross for evaluating the model) is carried out. The radonm splitting is carried out nboot times (default nboot=100)
  
- 
 ````
 testedMNL<-MNLTrainTest("mnl_input_0.csv",percent_cross=0.70,nboot=100)
 ````
-The testedMNL() function returns the accuracy values of the model according to the different training/testing sets. More precisely the quantiles of accuracies   
+The testedMNL() function returns the accuracy values of the model according to the different training/testing sets. More precisely the quantiles of accuracies. 
+
 
 ### Fitting the multinomial logistic model
 
+Once the most appropriate model (i.e. after testing different maxGenes and selecting the best model based on accuracy obtained on the test sets) the multinomial logistic model can be fitted on the full input dataset
 
 ### Predicting the source of other strains
 
