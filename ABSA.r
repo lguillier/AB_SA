@@ -22,7 +22,7 @@ source("MNLTrainTest.r") # Training and testing the model
 source("MNLFit.r") # Fitting (full dataset)
 source("MNLPredict.r") # Predicting membership probabilities of strains to attribute 
 
-## Applied ABSA on a dataset (here Salmonella Typhimurium )
+## Applied ABSA on a dataset (here 'Salmonella' Typhimurium )
 
 CreateInputMNL("DE_scoary_trait.csv","gene_presence_absence.Rtab",3)
 

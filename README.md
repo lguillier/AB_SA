@@ -44,7 +44,9 @@ A script (https://github.com/lguillier/AB_SA/blob/master/R/CreateInputMNL.r) was
 ````
 CreateInputMNL(traitfile="DE_scoary_trait.csv",roary_Rtab="gene_presence_absence.Rtab",maxGenes=10)
 ````
-The function produces a csv file (default name "mnl_input_n.csv" where n is the number of genes selected).
+The function thus produces:
+- a file (default name "mnl_input_n.csv" where n is the number of genes selected) for fitting multinomial logistic model,
+- a file (default name "predict_sporadic.csv") used for determining the probability of association  the source of unknown strains (sporadic human strains or environmental strains) 
 
 ### Training and testing a multinomial logistic model
  In order to assess the performance of the multinomial model with the enriched genes, a random splitting of data into training set (default value percent_cross= 70% for building a predictive model) and test set (1-percent_cross for evaluating the model) is carried out. The radonm splitting is carried out nboot times (default nboot=100)
@@ -57,7 +59,7 @@ The testedMNL() function returns the accuracy values of the model according to t
 
 ### Fitting the multinomial logistic model
 
-Once the most appropriate model (i.e. after testing different maxGenes and selecting the best model based on accuracy obtained on the test sets) the multinomial logistic model can be fitted on the full input dataset
+Once the most appropriate model (i.e. after testing different maxGenes and selecting the best model based on accuracy obtained on the test sets) the multinomial logistic model can be fitted on the full input dataset. The AIC value can 
 
 ### Predicting the source of other strains
 
