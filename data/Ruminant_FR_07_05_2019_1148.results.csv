@@ -1,0 +1,4 @@
+"Gene","Non-unique Gene name","Annotation","Number_pos_present_in","Number_neg_present_in","Number_pos_not_present_in","Number_neg_not_present_in","Sensitivity","Specificity","Odds_ratio","Naive_p","Bonferroni_p","Benjamini_H_p"
+"group_6195","","hypothetical protein","2","0","4","63","33.33333333333333","100.0","inf","0.006393861892583109","1.0","0.7347224809549218"
+"group_160","","hypothetical protein","3","3","3","60","50.0","95.23809523809523","20.0","0.006872800921260675","1.0","0.7347224809549218"
+"group_158","","hypothetical protein","4","8","2","55","66.66666666666666","87.3015873015873","13.75","0.0069745214513699675","1.0","0.7347224809549218"

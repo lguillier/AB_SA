@@ -1,0 +1,6 @@
+"Gene","Non-unique Gene name","Annotation","Number_pos_present_in","Number_neg_present_in","Number_pos_not_present_in","Number_neg_not_present_in","Sensitivity","Specificity","Odds_ratio","Naive_p","Bonferroni_p","Benjamini_H_p"
+"group_1926","","hypothetical protein","4","0","10","55","28.57142857142857","100.0","inf","0.0011578933974628123","0.5384204298202078","0.21491532138258868"
+"group_763","rrrD","Lysozyme RrrD","7","5","7","50","50.0","90.9090909090909","10.0","0.0014767103185949612","0.6866702981466569","0.21491532138258868"
+"group_735--group_1900--group_1901--group_1902","dinI_2------","DNA damage-inducible protein I--hypothetical protein--hypothetical protein--hypothetical protein","4","1","10","54","28.57142857142857","98.18181818181819","21.6","0.005076917204260023","1.0","0.21491532138258868"
+"group_176","","hypothetical protein","3","35","11","20","21.428571428571427","36.36363636363637","0.15584415584415584","0.006462611691526173","1.0","0.21491532138258868"
+"group_852","","hypothetical protein","3","0","11","55","21.428571428571427","100.0","inf","0.006947360384776884","1.0","0.21491532138258868"

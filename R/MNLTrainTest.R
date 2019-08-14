@@ -11,7 +11,7 @@
 #'  @export
 
 
-multinomial_train_test<-function(mnl_input,percent_cross,nboot)
+MNLTrainTest<-function(mnl_input,percent_cross,nboot)
 {
   set.seed(123)  
  

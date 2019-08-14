@@ -24,7 +24,7 @@ traits<-read.table(traitfile,header = TRUE,sep=",")
 trait_names<-colnames(traits)
 trait_names<-sort(trait_names[2:length(trait_names)])
 
-categories<-def_strain_category(traitfile)
+categories<-DefStrainCategory(traitfile)
 id_categories<-data.frame(id=traits$X,cat=categories) # will be used in step 3.
 
 ###### 2. Gather information from scoary enriched genes
@@ -39,7 +39,7 @@ pos_scoaryfiles<-grep(pattern = "results.csv",files)
 filenamescoary<-files[pos_scoaryfiles]
 
 # Extract from roary Rtab the list of all enriched genes (whatever the source) : create a list object
-all_enriched<-mapply(read_parse_scoary,filenamescoary,roaryRtab)
+all_enriched<-mapply(ReadParseScoary,filenamescoary,roaryRtab)
 names(all_enriched)<-trait_names 
 
 

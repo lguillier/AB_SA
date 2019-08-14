@@ -11,7 +11,7 @@
 #'  @export
 
 
-multinomial_fit<-function(mnl_input)
+MNLFit<-function(mnl_input)
 {
   set.seed(123)  
 

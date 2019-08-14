@@ -11,7 +11,7 @@
 #'@export
 
 
-multinomial_predict<-function(sporadic_pres_abs,fitted_mnl)
+MNLPredict<-function(sporadic_pres_abs,fitted_mnl)
 {
 data_pred<-read.table(sporadic_pres_abs,sep=";",header = TRUE)
 data_pred2<-subset(data_pred,select=-1)
