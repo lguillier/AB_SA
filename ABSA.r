@@ -32,6 +32,9 @@ final.trained<-MNLFit("mnl_input_0.csv")
 
 predict.unknown<-MNLPredict("predict_sporadic.csv",final.trained)
 
+barplot(t(predict.unknown),legend=row.names(t(predict.unknown)),args.legend = list(x='right',bty='n',inset=c(-0.1,0),xpd=TRUE),xlim = c(0,45),cex.names = 0.8,xlab="Environnemental strains",ylab = "Membership probabilities")
+
+
 ## Optimisation for French dataset
 AIC<-c()
 Accuracy<-matrix(c(0),20,3)
