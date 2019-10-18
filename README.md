@@ -1,5 +1,7 @@
 AB_SA - Source attribution based on accessory genes
 ========
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3507204.svg)](https://doi.org/10.5281/zenodo.3507204)
+
 Predicts the source of bacterial strains based on their accessory genes.
 
 ## Contents
