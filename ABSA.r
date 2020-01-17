@@ -31,14 +31,14 @@ testedMNL<-MNLTrainTest("mnl_input_0.csv",0.70,100)
 final.trained<-MNLFit("mnl_input_0.csv")
 
 predict.unknown<-MNLPredict("predict_sporadic.csv",final.trained)
-
+write.table(file="predicted_sources.csv",predict.unknown,sep=";")
 barplot(t(predict.unknown),legend=row.names(t(predict.unknown)),args.legend = list(x='right',bty='n',inset=c(-0.1,0),xpd=TRUE),xlim = c(0,45),cex.names = 0.8,xlab="Environnemental strains",ylab = "Membership probabilities")
 
 
 ## Optimisation for French dataset
 AIC<-c()
-Accuracy<-matrix(c(0),20,3)
-for (ng in 1:20)
+Accuracy<-matrix(c(0),10,3)
+for (ng in 1:10)
 {CreateInputMNL("~/AB_SA/data/FR_scoary_trait.csv","~/AB_SA/data/gene_presence_absence.Rtab",ng)
   testedMNL<-MNLTrainTest("mnl_input_0.csv",0.70,10)
   percentiles_accuracy<-testedMNL[[1]]
@@ -46,4 +46,16 @@ for (ng in 1:20)
   final.trained<-MNLFit("mnl_input_0.csv")
   AIC[ng]<-final.trained$AIC
 }
-  
+
+# Plot of coef 
+library(questionr)
+library(GGally)
+mnl_input<-c("mnl_input_0.csv")
+data<-read.table(mnl_input,sep=",",header = TRUE)
+data2<-subset(data,select=-1)
+data2$Source<-relevel(data2$Source,ref="Ruminant_FR")
+multinomModel_full <- nnet::multinom(Source ~ ., data=data2,trace=FALSE) # multinom Model
+ggcoef(multinomModel_full,exponentiate=FALSE,conf.int = FALSE)+facet_grid(~y.level)
+tidy(multinomModel_full,exponentiate = TRUE,conf.int = FALSE)
+odds.ratio(multinomModel_full)
+
