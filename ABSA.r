@@ -48,7 +48,9 @@ final.trained<-MNLFit("mnl_input_0.csv")
 predict.unknown<-MNLPredict("predict_sporadic.csv",final.trained)
 write.table(file="predicted_sources.csv",predict.unknown,sep=";")
 
-barplot(t(predict.unknown),legend=row.names(t(predict.unknown)),args.legend = list(x='right',bty='n',inset=c(-0.1,0),xpd=TRUE),xlim = c(0,45),cex.names = 0.8,xlab="Environnemental strains",ylab = "Membership probabilities")
+#xlegend<-c("1S","2S","3S","4W","5W","6W","7W","8W","9W","10W","11W","12C","13W","14W","15W","16W","17W","18W","19W","20W","21W","22W","23W","24W","25W","26W","27B","28B","29B")
+#rownames(predict.unknown)<-xlegend
+barplot(t(predict.unknown),legend=row.names(t(predict.unknown)),args.legend = list(x='right',bty='n',inset=c(-0.1,0),xpd=TRUE),xlim = c(0,45),cex.names = 0.7,xlab="Environnemental strains",ylab = "Membership probabilities")
 
 
 

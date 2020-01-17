@@ -54,16 +54,42 @@ The function thus produces:
 ````
 testedMNL<-MNLTrainTest("mnl_input_0.csv",percent_cross=0.70,nboot=100)
 ````
-The testedMNL() function returns the accuracy values of the model according to the different training/testing sets. More precisely the quantiles of accuracies. 
+The MNLTrainTest() function returns the accuracy values of the model according to the different training/testing sets. More precisely the quantiles of bootstrap  values of global accuracy, the median of balanced accuracies (one per source) for both accounting to unbalanced dataset and for exploring model performance for each source. 
 
+````
+# Explore the outputs:
+#[[1]] quantiles describing bootstrap accuracies, 
+testedMNL[[1]]
+
+#[[2]] median of balanced accuracies for each source
+testedMNL[[2]]
+
+#[[3]] ksdensity of bootstrap accuracies 
+testedMNL[[3]]
+````
 
 ### Fitting the multinomial logistic model
 
-Once the most appropriate model (i.e. after testing different maxGenes and selecting the best model based on accuracy obtained on the test sets) the multinomial logistic model can be fitted on the full input dataset. The AIC value can 
+Once the most appropriate model (i.e. after testing different maxGenes and selecting the best model based on accuracy obtained on the test sets) the multinomial logistic model can be fitted on the full input dataset with MNLFit function.
+````
+final.trained<-MNLFit("mnl_input_0.csv")
+````
 
+The AIC value is used as a way to compare different models (in order to prevent overfitting).
+
+````
+final.trained$AIC
+````
 ### Predicting the source of other strains
 
-### Ploting the results
+Finally, the source membership probabilities of strains with unknown origin are estimated with MNLPredict.
+````
+predict.unknown<-MNLPredict("predict_sporadic.csv",final.trained)
+write.table(file="predicted_sources.csv",predict.unknown,sep=";")
+
+barplot(t(predict.unknown),legend=row.names(t(predict.unknown)),args.legend = list(x='right',bty='n',inset=c(-0.1,0),xpd=TRUE),xlim = c(0,45),cex.names = 0.7,xlab="Environnemental strains",ylab = "Membership probabilities")
+````
+
 
 ## Licence
 
