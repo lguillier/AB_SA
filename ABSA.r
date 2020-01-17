@@ -24,27 +24,51 @@ source("~/AB_SA/R/MNLPredict.r") # Predicting membership probabilities of strain
 
 ## Application of ABSA on a dataset (here 'Salmonella' Typhimurium COMPARE French dataset)
 setwd("~/AB_SA/data")
-CreateInputMNL("~/AB_SA/data/FR_scoary_trait.csv","~/AB_SA/data/gene_presence_absence.Rtab",4)
 
+# First create the inputs for multinomial logistic model for a chosen maximum number of enriched genes in sources (maxGenes) with CreateInputMNL function
+
+CreateInputMNL("~/AB_SA/data/FR_scoary_trait.csv","~/AB_SA/data/gene_presence_absence.Rtab",maxGenes=4)
+
+# Then, assess the perfomance of that genes with MNLTrainTest function 
 testedMNL<-MNLTrainTest("mnl_input_0.csv",0.70,100)
 
+# Explore the outputs:
+#[[1]] quantiles describing bootstrap accuracies, 
+testedMNL[[1]]
+
+#[[2]] median of balanced accuracies for each source
+testedMNL[[2]]
+
+#[[3]] ksdensity of bootstrap accuracies 
+testedMNL[[3]]
+
+# Finally, used the full datatset to prepare the prediction model with MNLFit function, and predict the source of strains with unknown origin with MNLPredict
 final.trained<-MNLFit("mnl_input_0.csv")
 
 predict.unknown<-MNLPredict("predict_sporadic.csv",final.trained)
 write.table(file="predicted_sources.csv",predict.unknown,sep=";")
+
 barplot(t(predict.unknown),legend=row.names(t(predict.unknown)),args.legend = list(x='right',bty='n',inset=c(-0.1,0),xpd=TRUE),xlim = c(0,45),cex.names = 0.8,xlab="Environnemental strains",ylab = "Membership probabilities")
 
 
-## Optimisation for French dataset
+
+
+
+## Optimisation for French dataset for the article describing the approach
 AIC<-c()
+coefnames<-c()
 Accuracy<-matrix(c(0),10,3)
-for (ng in 1:10)
+Balanced_accuracies<-matrix(c(0),10,3)
+for (ng in 1:5)
 {CreateInputMNL("~/AB_SA/data/FR_scoary_trait.csv","~/AB_SA/data/gene_presence_absence.Rtab",ng)
-  testedMNL<-MNLTrainTest("mnl_input_0.csv",0.70,10)
+  testedMNL<-MNLTrainTest("mnl_input_0.csv",0.70,100)
   percentiles_accuracy<-testedMNL[[1]]
+  balanced_accuracies<-testedMNL[[2]]
   Accuracy[ng,1:3]<-percentiles_accuracy[c(1,3,5)]
+  Balanced_accuracies[ng,1:3]<-balanced_accuracies
   final.trained<-MNLFit("mnl_input_0.csv")
   AIC[ng]<-final.trained$AIC
+  coefnames<-c(coefnames,final.trained$coefnames)
 }
 
 # Plot of coef 
@@ -56,6 +80,6 @@ data2<-subset(data,select=-1)
 data2$Source<-relevel(data2$Source,ref="Ruminant_FR")
 multinomModel_full <- nnet::multinom(Source ~ ., data=data2,trace=FALSE) # multinom Model
 ggcoef(multinomModel_full,exponentiate=FALSE,conf.int = FALSE)+facet_grid(~y.level)
-tidy(multinomModel_full,exponentiate = TRUE,conf.int = FALSE)
+#tidy(multinomModel_full,exponentiate = TRUE,conf.int = FALSE)
 odds.ratio(multinomModel_full)
 
