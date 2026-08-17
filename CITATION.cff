@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use AB_SA in your work, please cite the software and the associated publication."
+title: "AB_SA: Accessory-Based Source Attribution"
+type: software
+version: 1.0.0
+date-released: 2026-08-17
+license: GPL-3.0
+repository-code: "https://github.com/lguillier/AB_SA"
+
+authors:
+  - family-names: Guillier
+    given-names: Laurent
+    orcid: "https://orcid.org/0000-0002-7867-2937"
+
+abstract: >-
+  AB_SA (Accessory-Based Source Attribution) is an R-based approach for
+  attributing bacterial strains of unknown origin to potential sources using
+  source-associated accessory genes and multinomial logistic regression.
+
+keywords:
+  - source attribution
+  - bacterial genomics
+  - accessory genome
+  - pangenome
+  - multinomial logistic regression
+  - microbial genomics
