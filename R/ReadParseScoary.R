@@ -17,7 +17,7 @@ genes_<-c()
 pos<-c()
 for (i in 1:length(data_$Gene))
 {
-  genes_[i]<-sub("-\\b.*", "",data_$Gene[i])
+  genes_[i] <- sub("--.*", "", data_$Gene[i])
   pos<-c(pos,which(genes_[i]==roary_out$Gene))
 }
 return(pos)
