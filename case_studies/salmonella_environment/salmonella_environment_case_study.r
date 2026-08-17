@@ -23,11 +23,11 @@ source("~/AB_SA/R/MNLFit.r") # Fitting (full dataset)
 source("~/AB_SA/R/MNLPredict.r") # Predicting membership probabilities of strains to attribute 
 
 ## Application of ABSA on a dataset (here 'Salmonella' Typhimurium COMPARE French dataset)
-setwd("~/AB_SA/data")
+setwd("~/AB_SA/data/salmonella")
 
 # First create the inputs for multinomial logistic model for a chosen maximum number of enriched genes in sources (maxGenes) with CreateInputMNL function
 
-CreateInputMNL("~/AB_SA/data/FR_scoary_trait.csv","~/AB_SA/data/gene_presence_absence.Rtab",maxGenes=4)
+CreateInputMNL("~/AB_SA/data/salmonella/FR_scoary_trait.csv","~/AB_SAdata/salmonella/gene_presence_absence.Rtab",maxGenes=4)
 
 # Then, assess the perfomance of that genes with MNLTrainTest function 
 testedMNL<-MNLTrainTest("mnl_input_0.csv",0.70,100)
@@ -62,7 +62,7 @@ coefnames<-c()
 Accuracy<-matrix(c(0),10,3)
 Balanced_accuracies<-matrix(c(0),10,3)
 for (ng in 1:5)
-{CreateInputMNL("~/AB_SA/data/FR_scoary_trait.csv","~/AB_SA/data/gene_presence_absence.Rtab",ng)
+{CreateInputMNL("~/AB_SAdata/salmonella/FR_scoary_trait.csv","~/AB_SA/data/salmonella/gene_presence_absence.Rtab",ng)
   testedMNL<-MNLTrainTest("mnl_input_0.csv",0.70,100)
   percentiles_accuracy<-testedMNL[[1]]
   balanced_accuracies<-testedMNL[[2]]
