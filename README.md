@@ -151,13 +151,13 @@ Source-membership probabilities can also be visualized to explore attribution pa
 
 Applications of AB_SA to specific datasets are provided in the [`case_studies`](case_studies/) directory.
 
-### Salmonella environment
+### *Salmonella* Typhimurium environment
 
 The [`salmonella_environment`](case_studies/salmonella_environment/) case study corresponds to the first application of AB_SA and to the analysis presented in the publication describing the method.
 
 AB_SA was applied to *Salmonella enterica* Typhimurium and its monophasic variant to predict the animal source of strains isolated from the environment. The case study illustrates the complete AB_SA workflow, from the identification and selection of source-associated accessory genes to model evaluation, fitting and source attribution.
 
-### Clostridium perfringens reservoir markers
+### *Clostridium perfringens* reservoir markers
 
 The [`clostridium_perfringens`](case_studies/clostridium_perfringens/) case study illustrates a second application of AB_SA, focused on the identification of reservoir-associated genomic markers in *Clostridium perfringens*.
 
